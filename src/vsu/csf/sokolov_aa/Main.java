@@ -10,7 +10,6 @@ public class Main {
 	    int n = getIntFromConsole("enter N");
         double x = getDoubleFromConsole("Enter X");
 
-
         System.out.println(findSumOfElem(n, x));
     }
 
@@ -41,7 +40,6 @@ public class Main {
         System.out.print("\n" + message + ": ");
         return in.nextInt();
     }
-
 
 
     public static double getDoubleFromConsole(String message) {
