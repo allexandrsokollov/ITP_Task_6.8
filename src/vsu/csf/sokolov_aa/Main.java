@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         Locale.setDefault(Locale.ROOT);
-	    int n = getIntFromConsole("enter N");
+	int n = getIntFromConsole("enter N");
         double x = getDoubleFromConsole("\nEnter X");
         double eps = getDoubleFromConsole("\nEnter eps");
 
@@ -18,6 +18,10 @@ public class Main {
     }
 
     public static double findSumOfElem(int n, double x) {
+	    
+	if(n == 0){
+		return 0;
+	}
         double sum = 1;
         double prev = 1;
 
