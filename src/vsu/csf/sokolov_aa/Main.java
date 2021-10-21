@@ -7,53 +7,47 @@ public class Main {
 
     public static void main(String[] args) {
         Locale.setDefault(Locale.ROOT);
-	int n = getIntFromConsole("enter N");
+	    int n = getIntFromConsole("enter N");
         double x = getDoubleFromConsole("\nEnter X");
         double eps = getDoubleFromConsole("\nEnter eps");
 
-        System.out.println("\nSum of elements is " + findSumOfElem(n, x));
-        System.out.println("Sum of elements that bigger then eps is " + findSumOfElemThatBiggerThanEps(eps, x));
-        System.out.println("Sum of elements that bigger then eps / 10 is " + findSumOfElemThatBiggerThanEps(eps / 10, x));
+        double[] result = findSumOfElem(n, x, eps);
+
+        System.out.println("\nSum of elements is " + result[2]);
+        System.out.println("Sum of elements that bigger then eps is " + result[0]);
+        System.out.println("Sum of elements that bigger then eps / 10 is " + result[1]);
         System.out.println("Value via Math library is " + Math.sqrt(1 + x));
     }
 
-    public static double findSumOfElem(int n, double x) {
-	    
-	if(n == 0){
-		return 0;
-	}
-        double sum = 1;
+    public static double[] findSumOfElem(int n, double x, double eps) {
+        final double[]  sum = new double[3];
         double prev = 1;
 
-        for(int i = 1; i <= n; i++) {
+        for (int i = 1; Math.abs(prev) >= eps /10 || i <= n; i++) {
 
-            if(isOdd(i)) {
+            if (Math.abs(prev) >= eps) {
+                sum[0] += prev;
+            }
+
+            if (Math.abs(prev) >= eps / 10) {
+                sum[1] += prev;
+            }
+
+            if (i <= n) {
+                sum[2] += prev;
+            }
+
+            if (isOdd(i)) {
                 prev *= (i * x) / (2 * i);
             } else {
                 prev *=  (-x) / (2 * i);
             }
-            sum += prev;
         }
 
         return sum;
     }
 
-    public static double findSumOfElemThatBiggerThanEps(double eps, double x) {
-        double sum = 1;
-        double prev = 1;
 
-        for(int i = 1; prev > eps; i++) {
-
-            if(isOdd(i)) {
-                prev *= (i * x) / (2 * i);
-            } else {
-                prev *=  (-x) / (2 * i);
-            }
-            sum += prev;
-        }
-
-        return sum;
-    }
 
 
     public static boolean isOdd(int number) {
