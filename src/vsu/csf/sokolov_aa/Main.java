@@ -7,6 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         Locale.setDefault(Locale.ROOT);
+
 	    int n = getIntFromConsole("enter N");
         double x = getDoubleFromConsole("\nEnter X");
         double eps = getDoubleFromConsole("\nEnter eps");
@@ -23,7 +24,7 @@ public class Main {
         final double[]  sum = new double[3];
         double prev = 1;
 
-        for (int i = 1; Math.abs(prev) >= eps /10 || i <= n; i++) {
+        for (int i = 1; (Math.abs(prev) >= eps / 10) || i <= n; i++) {
 
             if (Math.abs(prev) >= eps) {
                 sum[0] += prev;
@@ -47,9 +48,6 @@ public class Main {
         return sum;
     }
 
-
-
-
     public static boolean isOdd(int number) {
         return number % 2 != 0;
     }
@@ -59,7 +57,6 @@ public class Main {
         System.out.print(message + ": ");
         return in.nextInt();
     }
-
 
     public static double getDoubleFromConsole(String message) {
         Scanner in = new Scanner(System.in);
