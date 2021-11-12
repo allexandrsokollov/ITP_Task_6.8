@@ -58,6 +58,30 @@ public class Main {
         return sum;
     }
 
+    public static double[] theBestVersionIThink(int n, double x, double eps) {
+        final double[]  sum = new double[3];
+        double prev = 1;
+
+        for (int i = 0; (Math.abs(prev) >= eps / 10) || i <= n; i++) {
+
+            if (Math.abs(prev) >= eps) {
+                sum[0] += prev;
+            }
+
+            if (Math.abs(prev) >= eps / 10) {
+                sum[1] += prev;
+            }
+
+            if (i <= n) {
+                sum[2] += prev;
+            }
+
+            prev = prev * ((x * (0.5 - i)) / ++i);
+        }
+
+        return sum;
+    }
+
 
     public static void main(String[] args) {
         Locale.setDefault(Locale.ROOT);
@@ -70,6 +94,8 @@ public class Main {
 
         double[] dMResult = dmitriIvanovichVersion(n, x, eps);
 
+        double[] theBest = theBestVersionIThink(n, x, eps);
+
         System.out.printf("\nSum of elements is %.010f", result[2]);
         System.out.printf("\nSum of elements that bigger then eps is %.010f", result[0]);
         System.out.printf("\nSum of elements that bigger then eps / 10 is %.010f", result[1]);
@@ -78,6 +104,11 @@ public class Main {
         System.out.printf("\n\n\nSum of elements is %.010f", dMResult[2]);
         System.out.printf("\nSum of elements that bigger then eps is %.010f", dMResult[0]);
         System.out.printf("\nSum of elements that bigger then eps / 10 is %.010f", dMResult[1]);
+        System.out.printf("\nValue via Math library is %.010f", Math.sqrt(1 + x));
+
+        System.out.printf("\n\n\nSum of elements is %.010f", theBest[2]);
+        System.out.printf("\nSum of elements that bigger then eps is %.010f", theBest[0]);
+        System.out.printf("\nSum of elements that bigger then eps / 10 is %.010f", theBest[1]);
         System.out.printf("\nValue via Math library is %.010f", Math.sqrt(1 + x));
     }
 
